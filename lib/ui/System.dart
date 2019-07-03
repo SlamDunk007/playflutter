@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:playflutter/colors/CustomColors.dart';
 import 'package:playflutter/models/SystemData.dart';
+import 'package:playflutter/ui/SystemDetail.dart';
 import 'package:playflutter/utils/NetTools.dart';
 
 /**
@@ -13,7 +14,8 @@ class SystemPage extends StatefulWidget {
   }
 }
 
-class SystemPageState extends State<SystemPage> with AutomaticKeepAliveClientMixin{
+class SystemPageState extends State<SystemPage>
+    with AutomaticKeepAliveClientMixin {
   List<Data> systemList = new List();
 
   @override
@@ -22,6 +24,7 @@ class SystemPageState extends State<SystemPage> with AutomaticKeepAliveClientMix
   @override
   void initState() {
     super.initState();
+    print("System----------initState");
     NetTools.get("https://www.wanandroid.com/tree/json", (data) {
       SystemData systemData = SystemData.fromJson(data);
       for (int i = 0; i < systemData.data.length; i++) {
@@ -96,12 +99,19 @@ class SystemPageState extends State<SystemPage> with AutomaticKeepAliveClientMix
    * 收缩面板更多内容的Item
    */
   Widget _getRowItem(Children children) {
-    return new Padding(
-      padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[new Text(children.name)],
+    return new GestureDetector(
+      child: new Padding(
+        padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[new Text(children.name)],
+        ),
       ),
+      onTap: () {
+        Navigator.push(context, new MaterialPageRoute(builder: (context) {
+          return SystemDetail(children.id);
+        }));
+      },
     );
   }
 }

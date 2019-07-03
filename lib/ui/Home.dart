@@ -28,6 +28,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
+    print("Home----------initState");
     _getBannerList();
     _getHomePageList(page, false);
     _scrollController.addListener(() {
@@ -131,18 +132,9 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
         padding: EdgeInsets.fromLTRB(10, 7, 10, 7),
         child: new GestureDetector(
           onTap: () {
-            Navigator.push(
-                context,
-                new PageRouteBuilder(pageBuilder: (BuildContext context,
-                    Animation<double> animation,
-                    Animation<double> secondaryAnimation) {
-                  return new NewsWebPage(datasItem.link, datasItem.title);
-                }, transitionsBuilder: (BuildContext context,
-                    Animation<double> animation,
-                    Animation<double> secondaryAnimation,
-                    Widget child) {
-                  return WidgetStateUtils.createTransition(animation, child);
-                }));
+            Navigator.push(context, new MaterialPageRoute(builder: (context) {
+              return new NewsWebPage(datasItem.link, datasItem.title);
+            }));
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

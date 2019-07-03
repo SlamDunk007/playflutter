@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:playflutter/ui/Home.dart';
 import 'package:playflutter/ui/System.dart';
 import 'package:playflutter/ui/Wechat.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import 'colors/CustomColors.dart';
 
 void main() => runApp(MyApp());
 
@@ -81,28 +84,22 @@ class HomePageState extends State<HomePage> {
             onTap: _onBottomTab,
           ),
         ),
-        onWillPop: _onWillPop);
+        onWillPop: _doubleExit);
   }
 
-  Future<bool> _onWillPop() {
-    return showDialog(
-          context: context,
-          builder: (context) => new AlertDialog(
-            title: new Text('Are you sure?'),
-            content: new Text('Do you want to exit an App'),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: new Text('No'),
-              ),
-              new FlatButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: new Text('Yes'),
-              ),
-            ],
-          ),
-        ) ??
-        false;
+  int _lastClickTime = 0;
+
+  Future<bool> _doubleExit() {
+    int nowTime = new DateTime.now().microsecondsSinceEpoch;
+    if (_lastClickTime != 0 && nowTime - _lastClickTime > 1500) {
+      return new Future.value(true);
+    } else {
+      _lastClickTime = new DateTime.now().microsecondsSinceEpoch;
+      new Future.delayed(const Duration(milliseconds: 1500), () {
+        _lastClickTime = 0;
+      });
+    }
+    return new Future.value(false);
   }
 
   /**
