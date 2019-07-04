@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:playflutter/ui/Home.dart';
 import 'package:playflutter/ui/System.dart';
 import 'package:playflutter/ui/Wechat.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
-import 'colors/CustomColors.dart';
 
 void main() => runApp(MyApp());
 
@@ -43,7 +40,7 @@ class HomePageState extends State<HomePage> {
   int currentIndex = 0;
 
   // 定义PageController用于切换不同的界面
-  final PageController _pageController = new PageController(initialPage: 0);
+  final PageController _pageController = new PageController(initialPage: 0,viewportFraction: 1);
 
   @override
   void initState() {

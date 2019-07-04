@@ -83,13 +83,14 @@ class SystemPageState extends State<SystemPage>
    * 收缩面板每一条的Header Item
    */
   Widget _getHeaderItem(Data data) {
-    return ListTile(
-      title: Text(
+    return new Padding(
+      padding: EdgeInsets.all(16),
+      child: Text(
         data.name,
         style: new TextStyle(
             color: data.isExpanded
                 ? CustomColors.color_508cee
-                : CustomColors.color_333333,
+                : CustomColors.color_131313,
             fontSize: 18),
       ),
     );
@@ -101,10 +102,15 @@ class SystemPageState extends State<SystemPage>
   Widget _getRowItem(Children children) {
     return new GestureDetector(
       child: new Padding(
-        padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
+        padding: EdgeInsets.fromLTRB(30, 16, 30, 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[new Text(children.name)],
+          children: <Widget>[
+            new Text(
+              children.name,
+              style: TextStyle(fontSize: 16),
+            )
+          ],
         ),
       ),
       onTap: () {
