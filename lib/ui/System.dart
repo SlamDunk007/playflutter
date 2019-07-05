@@ -46,6 +46,7 @@ class SystemPageState extends State<SystemPage>
     );
     return new Scaffold(
       appBar: new AppBar(
+        centerTitle: true,
         title: Text("体系"),
       ),
       body: SingleChildScrollView(

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:playflutter/utils/NetTools.dart';
-import 'package:playflutter/models/HomeData.dart';
-import 'package:playflutter/colors/CustomColors.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:playflutter/colors/CustomColors.dart';
+import 'package:playflutter/models/HomeData.dart';
 import 'package:playflutter/ui/NewsWebPage.dart';
-import 'package:playflutter/utils/WidgetStateUtils.dart';
+import 'package:playflutter/utils/NetTools.dart';
 
 /**
  * 首页
