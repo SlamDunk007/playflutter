@@ -1,10 +1,9 @@
 # playflutter
 
-A new Flutter application for wanandroid
+一款基于wanandroid.com网站接口实现的Flutter练习项目，欢迎star!!!!!!!!!!
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
+## 注意事项
+1.打Release包的时候，发现无法访问网络，在app/src/profile下面的清单文件中已经有网络权限，但是在profile同级的目录main中的清单文件也要加上网络权限，然后重新打包即可通过。
 
 A few resources to get you started if this is your first Flutter project:
 

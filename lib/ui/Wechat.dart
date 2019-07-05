@@ -149,7 +149,7 @@ class WechatPageState extends State<WechatPage> {
       child: ListTile(
         title: new Text(
           authorItem.name,
-          style: TextStyle(color: CustomColors.color_131313),
+          style: TextStyle(color: CustomColors.color_131313,fontSize: 18),
         ),
       ),
     );
