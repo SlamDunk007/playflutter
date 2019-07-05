@@ -8,7 +8,6 @@
 - [安卓Apk体验下载地址](https://github.com/KM-BUG/playflutter/blob/master/android/app-release.apk)
 
 ## App截图
-<image src="https://github.com/KM-BUG/playflutter/raw/master/images/home.png" width="200">
-![](https://github.com/KM-BUG/playflutter/raw/master/images/home.png)
-![](https://github.com/KM-BUG/playflutter/raw/master/images/system.png)
-![](https://github.com/KM-BUG/playflutter/raw/master/images/wechat.png)
+<image src="https://github.com/KM-BUG/playflutter/raw/master/images/home.png" width="250">
+<image src="https://github.com/KM-BUG/playflutter/raw/master/images/system.png" width="250">
+<image src="https://github.com/KM-BUG/playflutter/raw/master/images/wechat.png" width="250">
