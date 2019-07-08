@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:playflutter/ui/Home.dart';
+import 'package:playflutter/ui/Personal.dart';
 import 'package:playflutter/ui/System.dart';
 import 'package:playflutter/ui/Wechat.dart';
 
@@ -40,7 +41,8 @@ class HomePageState extends State<HomePage> {
   int currentIndex = 0;
 
   // 定义PageController用于切换不同的界面
-  final PageController _pageController = new PageController(initialPage: 0,viewportFraction: 1);
+  final PageController _pageController =
+      new PageController(initialPage: 0, viewportFraction: 1);
 
   @override
   void initState() {
@@ -59,7 +61,9 @@ class HomePageState extends State<HomePage> {
               // 体系
               new SystemPage(),
               // 公众号
-              new WechatPage()
+              new WechatPage(),
+              // 个人中心
+              new Personal()
             ],
             onPageChanged: (int index) {
               setState(() {
@@ -71,13 +75,25 @@ class HomePageState extends State<HomePage> {
           bottomNavigationBar: BottomNavigationBar(
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                  icon: Icon(Icons.home), title: Text("首页")),
+                  icon: Icon(Icons.home),
+                  title: Text("首页"),
+                  backgroundColor: Colors.blue),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.school), title: Text("体系")),
+                  icon: Icon(Icons.school),
+                  title: Text("体系"),
+                  backgroundColor: Colors.blue),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.phone_android), title: Text("公众号"))
+                  icon: Icon(Icons.phone_android),
+                  title: Text("公众号"),
+                  backgroundColor: Colors.blue),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  title: Text("我的"),
+                  backgroundColor: Colors.blue)
             ],
             currentIndex: currentIndex,
+            type: BottomNavigationBarType.fixed,
+            fixedColor: Colors.blue,
             onTap: _onBottomTab,
           ),
         ),

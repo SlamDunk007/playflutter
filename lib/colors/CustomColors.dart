@@ -9,5 +9,8 @@ class CustomColors{
   static const Color color_ffffff = Color(0xffffffff);
   static const Color color_131313 = Color(0xff131313);
   static const Color color_8b8b8b = Color(0xff8b8b8b);
+  static const Color color_dce2ee = Color(0xffdce2ee);
+  static const Color color_1a1b1d = Color(0xff1a1b1d);
+  static const Color color_f7f8f8 = Color(0xfff7f8f8);
 
 }

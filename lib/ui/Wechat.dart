@@ -12,7 +12,8 @@ class WechatPage extends StatefulWidget {
   }
 }
 
-class WechatPageState extends State<WechatPage> {
+class WechatPageState extends State<WechatPage>
+    with AutomaticKeepAliveClientMixin {
   /**
    * 作者列表
    */
@@ -28,6 +29,13 @@ class WechatPageState extends State<WechatPage> {
    */
   int currentId = 408;
 
+  bool seleted = false;
+
+  /**
+   * 是否还有分页数据
+   */
+  bool hasMore = true;
+
   /**
    * 作者文章列表
    */
@@ -38,6 +46,9 @@ class WechatPageState extends State<WechatPage> {
   );
 
   ScrollController _scrollController = new ScrollController();
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -82,6 +93,11 @@ class WechatPageState extends State<WechatPage> {
         if (page == 1) {
           authorContentList.clear();
         }
+        if (authorContentData.data.datas.length == 20) {
+          hasMore = true;
+        } else {
+          hasMore = false;
+        }
         authorContentList.addAll(authorContentData.data.datas);
       });
     }, errorCallBack: (msg) {});
@@ -92,7 +108,12 @@ class WechatPageState extends State<WechatPage> {
     return new Scaffold(
       appBar: new AppBar(
         centerTitle: true,
-        title: Text("公众号",),
+        title: Text(
+          "公众号",
+        ),
+        actions: <Widget>[
+          new IconButton(icon: Icon(Icons.search), onPressed: () {})
+        ],
       ),
       body: new Row(
         children: <Widget>[
@@ -117,7 +138,9 @@ class WechatPageState extends State<WechatPage> {
             child: ListView.separated(
               itemBuilder: (context, index) {
                 if (index == authorContentList.length) {
-                  return _buildProgressIndicator();
+                  return hasMore
+                      ? _buildProgressIndicator()
+                      : _buildNoMoreLayout();
                 } else {
                   AuthorContentItem authorContentItem =
                       authorContentList[index];
@@ -136,21 +159,33 @@ class WechatPageState extends State<WechatPage> {
     );
   }
 
+  String authorName = "鸿洋";
+
   /**
    * 获取作者布局
    */
   Widget _getAuthorLayout(AuthorItem authorItem) {
-    return new GestureDetector(
-      onTap: () {
-        currentId = authorItem.id;
-        page = 1;
-        _getAuthorContent(authorItem.id, page);
-      },
-      child: ListTile(
+    return new Container(
+      color: authorName == authorItem.name
+          ? CustomColors.color_dce2ee
+          : CustomColors.color_ffffff,
+      child: new ListTile(
         title: new Text(
           authorItem.name,
-          style: TextStyle(color: CustomColors.color_131313,fontSize: 18),
+          style: TextStyle(color: CustomColors.color_131313, fontSize: 18),
         ),
+        onTap: () {
+          setState(() {
+            seleted = true;
+            authorName = authorItem.name;
+          });
+          currentId = authorItem.id;
+          page = 1;
+          _getAuthorContent(authorItem.id, page);
+        },
+        trailing: authorName == authorItem.name
+            ? new Icon(Icons.arrow_forward)
+            : new Icon(null),
       ),
     );
   }
@@ -167,7 +202,10 @@ class WechatPageState extends State<WechatPage> {
         }));
       },
       child: ListTile(
-        title: new Text(authorContentItem.title),
+        title: new Text(
+          authorContentItem.title,
+          style: TextStyle(color: CustomColors.color_131313, fontSize: 16),
+        ),
       ),
     );
   }
@@ -185,6 +223,20 @@ class WechatPageState extends State<WechatPage> {
         child: CircularProgressIndicator(
           strokeWidth: 2,
         ),
+      ),
+    );
+  }
+
+  /**
+   * 没有更多数据布局
+   */
+  Widget _buildNoMoreLayout() {
+    return new Padding(
+      padding: EdgeInsets.only(top: 10, bottom: 10),
+      child: new Text(
+        "Sorry,已经到底了",
+        style: new TextStyle(color: CustomColors.color_dce2ee, fontSize: 16),
+        textAlign: TextAlign.center,
       ),
     );
   }
