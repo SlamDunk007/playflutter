@@ -3,6 +3,7 @@ import 'package:playflutter/ui/Home.dart';
 import 'package:playflutter/ui/Personal.dart';
 import 'package:playflutter/ui/System.dart';
 import 'package:playflutter/ui/Wechat.dart';
+import 'package:playflutter/utils/Toast.dart';
 
 void main() => runApp(MyApp());
 
@@ -111,6 +112,7 @@ class HomePageState extends State<HomePage> {
       new Future.delayed(const Duration(milliseconds: 1500), () {
         _lastClickTime = 0;
       });
+      Toast.toast(context, "再按一次退出App");
     }
     return new Future.value(false);
   }

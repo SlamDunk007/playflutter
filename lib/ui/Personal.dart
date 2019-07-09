@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:playflutter/colors/CustomColors.dart';
+import 'package:playflutter/ui/Register.dart';
 
+/**
+ * 我的页面
+ */
 class Personal extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -34,14 +38,41 @@ class PersonalState extends State<Personal> {
                 ),
                 new Padding(
                   padding: EdgeInsets.only(left: 30),
+                  child: OutlineButton(
+                    textColor: Colors.blue[700],
+                    child: Text(
+                      "注册",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                        side: BorderSide(
+                            color: Colors.blue,
+                            style: BorderStyle.solid,
+                            width: 2)),
+                    onPressed: () => {
+                      Navigator.push(context,
+                          new MaterialPageRoute(builder: (context) {
+                        return new Register();
+                      }))
+                    },
+                  ),
+                ),
+                new Padding(
+                  padding: EdgeInsets.only(left: 30),
                   child: FlatButton(
                     color: Colors.blue,
                     highlightColor: Colors.blue[700],
                     colorBrightness: Brightness.dark,
                     splashColor: Colors.grey,
-                    child: Text("登陆"),
+                    child: Text(
+                      "登陆",
+                      style: TextStyle(fontSize: 15),
+                    ),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.0)),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    clipBehavior: Clip.antiAlias,
                     onPressed: () => {},
                   ),
                 ),
@@ -51,15 +82,15 @@ class PersonalState extends State<Personal> {
           ),
           // 我的收藏
           new Padding(
-            padding: EdgeInsets.only(top: 15),
+            padding: EdgeInsets.only(top: 10),
             child: new Container(
               width: MediaQuery.of(context).size.width,
               height: 50,
               child: ListTile(
                 title: new Text(
-                  "收藏文章列表",
+                  "文章列表",
                   style:
-                      TextStyle(fontSize: 20, color: CustomColors.color_333333),
+                      TextStyle(fontSize: 16, color: CustomColors.color_333333),
                 ),
                 leading: Icon(Icons.collections),
                 trailing: Icon(Icons.arrow_forward_ios),
@@ -68,15 +99,15 @@ class PersonalState extends State<Personal> {
             ),
           ),
           new Padding(
-            padding: EdgeInsets.only(top: 15),
+            padding: EdgeInsets.only(top: 10),
             child: new Container(
               width: MediaQuery.of(context).size.width,
               height: 50,
               child: ListTile(
                 title: new Text(
-                  "收藏站内文章",
+                  "站内文章",
                   style:
-                      TextStyle(fontSize: 20, color: CustomColors.color_333333),
+                      TextStyle(fontSize: 16, color: CustomColors.color_333333),
                 ),
                 leading: Icon(Icons.collections),
                 trailing: Icon(Icons.arrow_forward_ios),
@@ -85,15 +116,15 @@ class PersonalState extends State<Personal> {
             ),
           ),
           new Padding(
-            padding: EdgeInsets.only(top: 15),
+            padding: EdgeInsets.only(top: 10),
             child: new Container(
               width: MediaQuery.of(context).size.width,
               height: 50,
               child: ListTile(
                 title: new Text(
-                  "收藏站外文章",
+                  "站外文章",
                   style:
-                      TextStyle(fontSize: 20, color: CustomColors.color_333333),
+                      TextStyle(fontSize: 16, color: CustomColors.color_333333),
                 ),
                 leading: Icon(Icons.collections),
                 trailing: Icon(Icons.arrow_forward_ios),
