@@ -57,7 +57,7 @@ class NetTools {
         response = await Dio().get(url);
       } else {
         if (params != null && params.isNotEmpty) {
-          response = await Dio().post(url, data: params);
+          response = await Dio().post(url, queryParameters: params);
         } else {
           response = await Dio().post(url);
         }

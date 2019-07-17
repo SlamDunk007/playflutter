@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:playflutter/colors/CustomColors.dart';
+import 'package:playflutter/ui/Login.dart';
 import 'package:playflutter/ui/Register.dart';
 
 /**
@@ -73,7 +74,12 @@ class PersonalState extends State<Personal> {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                     clipBehavior: Clip.antiAlias,
-                    onPressed: () => {},
+                    onPressed: () => {
+                      Navigator.push(context,
+                          new MaterialPageRoute(builder: (context) {
+                        return new Login();
+                      }))
+                    },
                   ),
                 ),
               ],
