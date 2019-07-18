@@ -79,7 +79,7 @@ class RegisterState extends State<Register> {
               child: TextField(
                 decoration: InputDecoration(
                     hintMaxLines: 1,
-                    hintText: "输入密码",
+                    hintText: "不少于6位的密码",
                     labelText: "密码",
                     prefixIcon: Icon(Icons.lock)),
                 obscureText: true,
@@ -93,7 +93,7 @@ class RegisterState extends State<Register> {
               child: TextField(
                 decoration: InputDecoration(
                     hintMaxLines: 1,
-                    hintText: "再输入一次",
+                    hintText: "不少于6位的密码",
                     labelText: "密码",
                     prefixIcon: Icon(Icons.lock)),
                 obscureText: true,
