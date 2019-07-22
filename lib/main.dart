@@ -17,9 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primaryColor: CustomColors.color_1a1b1d
-      ),
+      theme: ThemeData(primaryColor: CustomColors.color_1a1b1d),
       home: HomePage(homeTitle: 'Play Flutter'),
     );
   }
@@ -73,6 +71,7 @@ class HomePageState extends State<HomePage> {
               });
             },
           ),
+          backgroundColor: CustomColors.color_1a1b1d,
           // 底部导航栏
           bottomNavigationBar: BottomNavigationBar(
             items: <BottomNavigationBarItem>[

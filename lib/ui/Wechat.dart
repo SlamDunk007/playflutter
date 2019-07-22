@@ -156,6 +156,7 @@ class WechatPageState extends State<WechatPage>
           )
         ],
       ),
+      backgroundColor: CustomColors.color_1a1b1d,
     );
   }
 
