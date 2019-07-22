@@ -42,7 +42,7 @@ class WechatPageState extends State<WechatPage>
   List<AuthorContentItem> authorContentList = new List();
   Widget divider = new Divider(
     height: 0.33,
-    color: CustomColors.color_e5e6f2,
+    color: CustomColors.color_2f323a,
   );
 
   ScrollController _scrollController = new ScrollController();
@@ -131,7 +131,7 @@ class WechatPageState extends State<WechatPage>
           ),
           new Container(
             width: 0.33,
-            color: CustomColors.color_e5e6f2,
+            color: CustomColors.color_242730,
           ),
           new Expanded(
             flex: 2,
@@ -167,12 +167,12 @@ class WechatPageState extends State<WechatPage>
   Widget _getAuthorLayout(AuthorItem authorItem) {
     return new Container(
       color: authorName == authorItem.name
-          ? CustomColors.color_dce2ee
-          : CustomColors.color_ffffff,
+          ? CustomColors.color_1a1b1d
+          : CustomColors.color_242730,
       child: new ListTile(
         title: new Text(
           authorItem.name,
-          style: TextStyle(color: CustomColors.color_131313, fontSize: 18),
+          style: TextStyle(color: CustomColors.color_9a9ead, fontSize: 18),
         ),
         onTap: () {
           setState(() {
@@ -184,7 +184,10 @@ class WechatPageState extends State<WechatPage>
           _getAuthorContent(authorItem.id, page);
         },
         trailing: authorName == authorItem.name
-            ? new Icon(Icons.arrow_forward)
+            ? new Icon(
+                Icons.arrow_forward,
+                color: CustomColors.color_9a9ead,
+              )
             : new Icon(null),
       ),
     );
@@ -194,17 +197,20 @@ class WechatPageState extends State<WechatPage>
    * 获取作者文章列表布局
    */
   Widget _getAuthorContentLayout(AuthorContentItem authorContentItem) {
-    return new GestureDetector(
-      onTap: () {
-        Navigator.push(context, new MaterialPageRoute(builder: (context) {
-          return new NewsWebPage(
-              authorContentItem.link, authorContentItem.title);
-        }));
-      },
-      child: ListTile(
-        title: new Text(
-          authorContentItem.title,
-          style: TextStyle(color: CustomColors.color_131313, fontSize: 16),
+    return new Container(
+      color: CustomColors.color_242730,
+      child: new GestureDetector(
+        onTap: () {
+          Navigator.push(context, new MaterialPageRoute(builder: (context) {
+            return new NewsWebPage(
+                authorContentItem.link, authorContentItem.title);
+          }));
+        },
+        child: ListTile(
+          title: new Text(
+            authorContentItem.title,
+            style: TextStyle(color: CustomColors.color_9a9ead, fontSize: 16),
+          ),
         ),
       ),
     );
@@ -215,6 +221,7 @@ class WechatPageState extends State<WechatPage>
    */
   Widget _buildProgressIndicator() {
     return new Container(
+      color: CustomColors.color_242730,
       padding: EdgeInsets.all(16.0),
       alignment: Alignment.center,
       child: new SizedBox(
@@ -231,12 +238,15 @@ class WechatPageState extends State<WechatPage>
    * 没有更多数据布局
    */
   Widget _buildNoMoreLayout() {
-    return new Padding(
-      padding: EdgeInsets.only(top: 10, bottom: 10),
-      child: new Text(
-        "Sorry,已经到底了",
-        style: new TextStyle(color: CustomColors.color_dce2ee, fontSize: 16),
-        textAlign: TextAlign.center,
+    return new Container(
+      color: CustomColors.color_242730,
+      child: new Padding(
+        padding: EdgeInsets.only(top: 10, bottom: 10),
+        child: new Text(
+          "Sorry,已经到底了",
+          style: new TextStyle(color: CustomColors.color_dce2ee, fontSize: 16),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }

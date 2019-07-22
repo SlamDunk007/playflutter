@@ -51,15 +51,15 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
    */
   void _getBannerList() {
     bannerLists.add(
+        "https://www.wanandroid.com/blogimgs/62c1bd68-b5f3-4a3c-a649-7ca8c7dfabe6.png");
+    bannerLists.add(
+        "https://www.wanandroid.com/blogimgs/fb0ea461-e00a-482b-814f-4faca5761427.png");
+    bannerLists.add(
         "https://wanandroid.com/blogimgs/fbed8f14-1043-4a43-a7ee-0651996f7c49.jpeg");
     bannerLists.add(
         "https://www.wanandroid.com/blogimgs/50c115c2-cf6c-4802-aa7b-a4334de444cd.png");
     bannerLists.add(
         "https://www.wanandroid.com/blogimgs/ab17e8f9-6b79-450b-8079-0f2287eb6f0f.png");
-    bannerLists.add(
-        "https://www.wanandroid.com/blogimgs/fb0ea461-e00a-482b-814f-4faca5761427.png");
-    bannerLists.add(
-        "https://www.wanandroid.com/blogimgs/62c1bd68-b5f3-4a3c-a649-7ca8c7dfabe6.png");
     bannerLists.add(
         "https://www.wanandroid.com/blogimgs/00f83f1d-3c50-439f-b705-54a49fc3d90d.jpg");
   }
@@ -95,7 +95,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     Widget divider = new Divider(
-      color: CustomColors.color_e5e6f2,
+      color: CustomColors.color_2f323a,
       height: 0.33,
     );
     return new RefreshIndicator(
@@ -109,7 +109,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
             return _buildProgressIndicator();
           } else {
             Datas datasItem = lists[index - 1];
-            return _getListViewItem(datasItem);
+            return _buildListViewItem(datasItem);
           }
         },
         itemCount: lists.length + 2,
@@ -126,61 +126,64 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   /**
    * 创建listView的item
    */
-  Widget _getListViewItem(Datas datasItem) {
-    return Padding(
-        padding: EdgeInsets.fromLTRB(10, 7, 10, 7),
-        child: new GestureDetector(
-          onTap: () {
-            Navigator.push(context, new MaterialPageRoute(builder: (context) {
-              return new NewsWebPage(datasItem.link, datasItem.title);
-            }));
-          },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              new Padding(
-                padding: EdgeInsets.only(bottom: 22),
-                child: new Text(
-                  datasItem.title,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: new TextStyle(
-                      color: CustomColors.color_333333, fontSize: 16),
+  Widget _buildListViewItem(Datas datasItem) {
+    return new Container(
+      color: CustomColors.color_1a1b1d,
+      child: Padding(
+          padding: EdgeInsets.fromLTRB(10, 7, 10, 7),
+          child: new GestureDetector(
+            onTap: () {
+              Navigator.push(context, new MaterialPageRoute(builder: (context) {
+                return new NewsWebPage(datasItem.link, datasItem.title);
+              }));
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Padding(
+                  padding: EdgeInsets.only(bottom: 22),
+                  child: new Text(
+                    datasItem.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: new TextStyle(
+                        color: CustomColors.color_9a9ead, fontSize: 16),
+                  ),
                 ),
-              ),
-              new Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  new Expanded(
-                    flex: 1,
-                    child: Text(
-                      "日期：" + datasItem.niceDate,
-                      style: new TextStyle(
-                          color: CustomColors.color_9a9ead, fontSize: 11),
+                new Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    new Expanded(
+                      flex: 1,
+                      child: Text(
+                        "日期：" + datasItem.niceDate,
+                        style: new TextStyle(
+                            color: CustomColors.color_9a9ead, fontSize: 11),
+                      ),
                     ),
-                  ),
-                  new Expanded(
-                    flex: 1,
-                    child: Text(
-                      "作者：" + datasItem.author,
-                      style: new TextStyle(
-                          color: CustomColors.color_9a9ead, fontSize: 11),
-                      textAlign: TextAlign.center,
+                    new Expanded(
+                      flex: 1,
+                      child: Text(
+                        "作者：" + datasItem.author,
+                        style: new TextStyle(
+                            color: CustomColors.color_9a9ead, fontSize: 11),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
-                  new Expanded(
-                    flex: 1,
-                    child: new Image(
-                      image: new AssetImage("images/sicon_create.png"),
-                      width: 31,
-                      height: 15,
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-        ));
+                    new Expanded(
+                      flex: 1,
+                      child: new Image(
+                        image: new AssetImage("images/sicon_create.png"),
+                        width: 31,
+                        height: 15,
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          )),
+    );
   }
 
   /**
@@ -188,6 +191,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
    */
   Widget _buildProgressIndicator() {
     return new Container(
+      color: CustomColors.color_1a1b1d,
       padding: EdgeInsets.all(16.0),
       alignment: Alignment.center,
       child: new SizedBox(
@@ -215,7 +219,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
             fit: BoxFit.fill,
           );
         },
-        autoplay: false,
+        autoplay: true,
         pagination: new SwiperPagination(
             builder: DotSwiperPaginationBuilder(
           color: Colors.black54,

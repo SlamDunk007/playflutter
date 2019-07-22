@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:playflutter/colors/CustomColors.dart';
 import 'package:playflutter/ui/Home.dart';
 import 'package:playflutter/ui/Personal.dart';
 import 'package:playflutter/ui/System.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: CustomColors.color_1a1b1d
       ),
       home: HomePage(homeTitle: 'Play Flutter'),
     );
@@ -77,24 +78,30 @@ class HomePageState extends State<HomePage> {
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                   icon: Icon(Icons.home),
-                  title: Text("首页"),
-                  backgroundColor: Colors.blue),
+                  title: Text(
+                    "首页",
+                  )),
               BottomNavigationBarItem(
                   icon: Icon(Icons.school),
-                  title: Text("体系"),
-                  backgroundColor: Colors.blue),
+                  title: Text(
+                    "体系",
+                  )),
               BottomNavigationBarItem(
                   icon: Icon(Icons.phone_android),
-                  title: Text("公众号"),
-                  backgroundColor: Colors.blue),
+                  title: Text(
+                    "公众号",
+                  )),
               BottomNavigationBarItem(
                   icon: Icon(Icons.person),
-                  title: Text("我的"),
-                  backgroundColor: Colors.blue)
+                  title: Text(
+                    "我的",
+                  ))
             ],
             currentIndex: currentIndex,
             type: BottomNavigationBarType.fixed,
-            fixedColor: Colors.blue,
+            backgroundColor: CustomColors.color_232529,
+            selectedItemColor: CustomColors.color_508cee,
+            unselectedItemColor: CustomColors.color_9a9ead,
             onTap: _onBottomTab,
           ),
         ),
@@ -121,8 +128,7 @@ class HomePageState extends State<HomePage> {
    * 当底部tab被点击的时候
    */
   void _onBottomTab(int index) {
-    _pageController.animateToPage(index,
-        duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+    _pageController.jumpToPage(index);
     setState(() {
       currentIndex = index;
     });
