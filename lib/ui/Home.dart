@@ -3,6 +3,8 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:playflutter/colors/CustomColors.dart';
 import 'package:playflutter/models/HomeData.dart';
 import 'package:playflutter/ui/NewsWebPage.dart';
+import 'package:playflutter/ui/Search.dart';
+import 'package:playflutter/utils/CustomRoute.dart';
 import 'package:playflutter/utils/NetTools.dart';
 
 /**
@@ -27,7 +29,6 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
-    print("Home----------initState");
     _getBannerList();
     _getHomePageList(page, false);
     _scrollController.addListener(() {
@@ -78,9 +79,7 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
         }
         lists.addAll(homePageData.data.datas);
       });
-    }, errorCallBack: (msg) {
-      print("错误信息：" + msg);
-    });
+    }, errorCallBack: (msg) {});
   }
 
   /**
@@ -98,29 +97,31 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
       color: CustomColors.color_2f323a,
       height: 0.33,
     );
-    return new RefreshIndicator(
-      child: new ListView.separated(
-        itemBuilder: (BuildContext context, int index) {
-          if (index == 0) {
-            // 轮播图
-            return _swiperHeader(context);
-          } else if (index == lists.length + 1) {
-            // 上拉加载的菊花
-            return _buildProgressIndicator();
-          } else {
-            Datas datasItem = lists[index - 1];
-            return _buildListViewItem(datasItem);
-          }
-        },
-        itemCount: lists.length + 2,
-        physics: const AlwaysScrollableScrollPhysics(),
-        separatorBuilder: (BuildContext context, int index) {
-          return divider;
-        },
-        controller: _scrollController,
-      ),
-      onRefresh: _onRefreshHomePage,
-    );
+    return new SafeArea(
+        top: true,
+        child: new RefreshIndicator(
+          child: new ListView.separated(
+            itemBuilder: (BuildContext context, int index) {
+              if (index == 0) {
+                // 轮播图
+                return _swiperHeader(context);
+              } else if (index == lists.length + 1) {
+                // 上拉加载的菊花
+                return _buildProgressIndicator();
+              } else {
+                Datas datasItem = lists[index - 1];
+                return _buildListViewItem(datasItem);
+              }
+            },
+            itemCount: lists.length + 2,
+            physics: const AlwaysScrollableScrollPhysics(),
+            separatorBuilder: (BuildContext context, int index) {
+              return divider;
+            },
+            controller: _scrollController,
+          ),
+          onRefresh: _onRefreshHomePage,
+        ));
   }
 
   /**
@@ -133,9 +134,8 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
           padding: EdgeInsets.fromLTRB(10, 7, 10, 7),
           child: new GestureDetector(
             onTap: () {
-              Navigator.push(context, new MaterialPageRoute(builder: (context) {
-                return new NewsWebPage(datasItem.link, datasItem.title);
-              }));
+              Navigator.of(context).push(CustomRoute(
+                  new NewsWebPage(datasItem.link, datasItem.title)));
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -208,24 +208,72 @@ class HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
    * 顶部轮播图
    */
   Widget _swiperHeader(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 200,
-      child: Swiper(
-        itemCount: bannerLists.length,
-        itemBuilder: (context, index) {
-          return Image.network(
-            bannerLists[index],
-            fit: BoxFit.fill,
-          );
-        },
-        autoplay: true,
-        pagination: new SwiperPagination(
-            builder: DotSwiperPaginationBuilder(
-          color: Colors.black54,
-          activeColor: Colors.white,
-        )),
-      ),
+    return new Column(
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(left: 10, right: 10, bottom: 14, top: 10),
+          child: GestureDetector(
+            child: Container(
+              height: 31,
+              color: CustomColors.color_242730,
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    child: Icon(
+                      Icons.search,
+                      color: CustomColors.color_9a9ead,
+                    ),
+                    padding: EdgeInsets.only(left: 8),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 4),
+                    child: Text(
+                      "搜索热词",
+                      style: TextStyle(
+                          fontSize: 14, color: CustomColors.color_9a9ead),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 4),
+                    child: Align(
+                      widthFactor: 8,
+                      child: Text(
+                        "搜索",
+                        style: TextStyle(
+                            fontSize: 14, color: CustomColors.color_508cee),
+                      ),
+                      alignment: Alignment.centerRight,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            onTap: () {
+              // 跳转到搜索页面
+              Navigator.of(context).push(CustomRoute(Search()));
+            },
+          ),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: 200,
+          child: Swiper(
+            itemCount: bannerLists.length,
+            itemBuilder: (context, index) {
+              return Image.network(
+                bannerLists[index],
+                fit: BoxFit.fill,
+              );
+            },
+            autoplay: true,
+            pagination: new SwiperPagination(
+                builder: DotSwiperPaginationBuilder(
+              color: Colors.black54,
+              activeColor: Colors.white,
+            )),
+          ),
+        )
+      ],
     );
   }
 }
