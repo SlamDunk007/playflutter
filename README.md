@@ -4,7 +4,7 @@
 
 ## 注意事项
 1.打Release包的时候，发现无法访问网络，在app/src/profile下面的清单文件中已经有网络权限，但是在profile同级的目录main中的清单文件也要加上网络权限，然后重新打包即可通过。
- 2.不知道如何打Release包，可以参考这篇文章[Flutter打包流程](https://www.jianshu.com/p/f00d8722203c)
+2.不知道如何打Release包，可以参考这篇文章[Flutter打包流程](https://www.jianshu.com/p/f00d8722203c)
 - [安卓Apk体验下载地址](https://github.com/KM-BUG/playflutter/blob/master/android/app-release.apk)
 
 ## App截图
